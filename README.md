@@ -69,11 +69,11 @@ Step 2-Data Preprocessing
 
 Step 3- Building the Recommendation system
 
--Creating the similarity matrix with rows and columns as item_columns. An item-item matrix(Item-based collaborative filtering).
--Inserting values into the similarity matrix.Use Jaccard similarity to compute the similarity between items(Jaccard similarity=|intersection(x,y)|/|union(x,y)|. Fill in the diagonal values with similarity of 1.0,can reduce the time complexity of filling in the matrix by noting the fact that the similarity matrix is symmetric.
--Create the score matrix for each user by taking the dot product of the data matrix with the similarity matrix.
--Generate the top n recommendations for each user.Each user corresponds to a unique order_id.
--Sort the items by user_column in descending order of the score value.
+*Creating the similarity matrix with rows and columns as item_columns. An item-item matrix(Item-based collaborative filtering).
+*Inserting values into the similarity matrix.Use Jaccard similarity to compute the similarity between items(Jaccard similarity=|intersection(x,y)|/|union(x,y)|. Fill in the diagonal values with similarity of 1.0,can reduce the time complexity of filling in the matrix by noting the fact that the similarity matrix is symmetric.
+*Create the score matrix for each user by taking the dot product of the data matrix with the similarity matrix.
+*Generate the top n recommendations for each user.Each user corresponds to a unique order_id.
+*Sort the items by user_column in descending order of the score value.
 
 The code and outputs are uploaded in separate files.
 
