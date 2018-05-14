@@ -49,3 +49,32 @@ l3 Level 3 Product hierarchy (most granular)
 sku Product ID (sanitized)
 brand Product brand (sanitized)
 
+
+Approach:
+
+Step 1-Data Exploration
+-The dataset consists of 2107537 rows(observations) 6 columns(variables). 
+-Used pandas_profiling package to get a detailed description about each column,the sparsity percentage in the dataset and the correlation between the columns. 
+-Identified the brands that was bought the most.
+-Identified the items that were bought the most as identified by the sku(stock keeping unit) column.
+
+Step 2-Data Preprocessing
+-To avoid the user cold start problem in Rec engines we will take into account only the users who have made more than a threshold number of orders.(For this dataset I have taken users who have made more than 10 transactions).
+- One Hot Encoding the 'l3' column(the most granular column) makes the unique items in 'l3' as separate columns.(helpful in creating the item matrix which we will see later).
+-Remove all the unnecessary columns,we will take into account the order_id and the'l3' columns that we encoded only.
+- Consolidate each row(order) into a single record such that order_id column is sorted.Also reset the index.
+-Split the columns into user and item columns in order to construct the user-item matrix.User column='order_id',item_columns=remaining columns.
+
+Step 3- Building the Recommendation system
+-Creating the similarity matrix with rows and columns as item_columns. An item-item matrix(Item-based collaborative filtering).
+-Inserting values into the similarity matrix.Use Jaccard similarity to compute the similarity between items(Jaccard similarity=|intersection(x,y)|/|union(x,y)|. Fill in the diagonal values with similarity of 1.0,can reduce the time complexity of filling in the matrix by noting the fact that the similarity matrix is symmetric.
+-Create the score matrix for each user by taking the dot product of the data matrix with the similarity matrix.
+-Generate the top n recommendations for each user.Each user corresponds to a unique order_id.
+-Sort the items by user_column in descending order of the score value.
+
+The code and outputs are uploaded in separate files.
+
+
+
+
+
